@@ -15,7 +15,11 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
 
-        <Checkbox label='Test' onChange={()=>{console.log('Changed')}} />
+        <Checkbox label='Click me' isChecked={true} onChange={()=>{console.log('Changed')}} />
+
+        <Checkbox isChecked={false}/>
+
+        <Checkbox disabled={true} />
       </div>
     );
   }
