@@ -5,23 +5,32 @@ class Checkbox extends Component
 {
     state = { isChecked: false }
 
+    componentDidMount()
+    {
+        this.setState({ isChecked: this.props.isChecked });
+    }
+
     toggleCheckboxChange = () => {
         this.setState({ isChecked: !this.state.isChecked });
+        this.props.onChange && this.props.onChange();
     }
 
     render() {
-        const { label } = this.props;
+        const { label, disabled, name } = this.props;
         const { isChecked } = this.state;
+        const elementName = name || 'checkbox';
 
         return (
             <div>
                 <input
                     type="checkbox"
+                    name={elementName}
                     value={label}
                     checked={isChecked}
+                    disabled={disabled}
                     onChange={this.toggleCheckboxChange}
                 />
-                <label>{label}</label>
+                <label htmlFor={elementName}>{label}</label>
             </div>
         );
     }
@@ -29,7 +38,10 @@ class Checkbox extends Component
 
 Checkbox.propTypes = {
   label     : PropTypes.string,
-  onChange  : PropTypes.func
+  name      : PropTypes.string,
+  disabled  : PropTypes.bool,
+  onChange  : PropTypes.func,
+  isChecked : PropTypes.bool
 }
 
 export default Checkbox
